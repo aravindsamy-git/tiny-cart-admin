@@ -1,17 +1,7 @@
 
 import React from 'react';
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Package, ShoppingCart, TrendingUp, Truck, Users } from 'lucide-react';
 import StatsCard from '@/components/StatsCard';
-
-const data = [
-  { name: 'Jan', sales: 400 },
-  { name: 'Feb', sales: 300 },
-  { name: 'Mar', sales: 500 },
-  { name: 'Apr', sales: 800 },
-  { name: 'May', sales: 300 },
-  { name: 'Jun', sales: 550 },
-];
 
 const IndexPage = () => {
   return (
@@ -56,20 +46,7 @@ const IndexPage = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 glass-card rounded-xl p-6 animate-fadeIn" style={{ animationDelay: '100ms' }}>
-          <h2 className="text-lg font-medium mb-4">Sales Overview</h2>
-          <div className="h-72">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Bar dataKey="sales" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
+      <div className="grid grid-cols-1 gap-6">
         <div className="glass-card rounded-xl p-6 animate-fadeIn" style={{ animationDelay: '200ms' }}>
           <h2 className="text-lg font-medium mb-4">Recent Activity</h2>
           <div className="space-y-4">

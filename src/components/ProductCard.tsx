@@ -15,7 +15,7 @@ export interface Product {
 interface ProductCardProps {
   product: Product;
   onStockChange?: (id: number, newStock: number) => void;
-  className?: string;
+  className?: Record<string, boolean> | string;
 }
 
 const ProductCard = ({ product, onStockChange, className }: ProductCardProps) => {

@@ -22,7 +22,7 @@ export interface OrderItem {
 interface OrderItemProps {
   order: OrderItem;
   onStatusChange?: (id: string, newStatus: OrderStatus) => void;
-  className?: string;
+  className?: Record<string, boolean> | string;
 }
 
 const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {

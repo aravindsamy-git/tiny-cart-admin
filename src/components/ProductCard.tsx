@@ -5,17 +5,18 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   stock: number;
   image: string;
   category: string;
+  size: "standard" | "large" | "exlarge";
 }
 
 interface ProductCardProps {
   product: Product;
-  onStockChange?: (id: number, newStock: number) => void;
+  onStockChange?: (id: string, newStock: number) => void;
   className?: Record<string, boolean> | string;
 }
 
@@ -58,7 +59,10 @@ const ProductCard = ({ product, onStockChange, className }: ProductCardProps) =>
       
       <div className="p-4">
         <h3 className="text-lg font-medium">{product.name}</h3>
-        <p className="text-muted-foreground">${product.price.toFixed(2)}</p>
+        <div className="flex justify-between items-center">
+          <p className="text-muted-foreground">${product.price.toFixed(2)}</p>
+          <span className="text-xs text-muted-foreground">Size: {product.size}</span>
+        </div>
         
         <div className="mt-4 space-y-4">
           <div className="flex items-center justify-between">

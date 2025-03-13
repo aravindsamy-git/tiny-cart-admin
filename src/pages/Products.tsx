@@ -6,59 +6,65 @@ import { toast } from 'sonner';
 // Initial product data
 const initialProducts: Product[] = [
   {
-    id: 1,
+    id: "1",
     name: 'Premium Headphones',
     price: 249.99,
     stock: 45,
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Audio'
+    category: 'Audio',
+    size: 'standard'
   },
   {
-    id: 2,
+    id: "2",
     name: 'Wireless Keyboard',
     price: 129.99,
     stock: 32,
     image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Accessories'
+    category: 'Accessories',
+    size: 'standard'
   },
   {
-    id: 3,
+    id: "3",
     name: 'Smart Watch',
     price: 299.99,
     stock: 18,
     image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Wearables'
+    category: 'Wearables',
+    size: 'large'
   },
   {
-    id: 4,
+    id: "4",
     name: 'Bluetooth Speaker',
     price: 179.99,
     stock: 27,
     image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Audio'
+    category: 'Audio',
+    size: 'large'
   },
   {
-    id: 5,
+    id: "5",
     name: 'Ergonomic Mouse',
     price: 89.99,
     stock: 41,
     image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Accessories'
+    category: 'Accessories',
+    size: 'standard'
   },
   {
-    id: 6,
+    id: "6",
     name: 'Laptop Stand',
     price: 49.99,
     stock: 36,
     image: 'https://images.unsplash.com/photo-1619017098958-57b1e2d275e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-    category: 'Accessories'
+    category: 'Accessories',
+    size: 'exlarge'
   },
 ];
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
 
-  const handleStockChange = (id: number, newStock: number) => {
+  const handleStockChange = (id: string, newStock: number) => {
     setProducts(products.map(product => 
       product.id === id ? { ...product, stock: newStock } : product
     ));

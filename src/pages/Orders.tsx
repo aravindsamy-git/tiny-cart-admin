@@ -11,12 +11,23 @@ const initialOrders: OrderItemType[] = [
     date: 'Aug 12, 2023',
     total: 549.97,
     status: 'processing',
+    userId: '60d21b4967d0d8992e610c85',
     items: [
       { productId: 1, productName: 'Premium Headphones', quantity: 1, price: 249.99 },
       { productId: 5, productName: 'Ergonomic Mouse', quantity: 1, price: 89.99 },
       { productId: 6, productName: 'Laptop Stand', quantity: 1, price: 49.99 },
       { productId: 4, productName: 'Bluetooth Speaker', quantity: 1, price: 179.99 },
     ],
+    shippingAddress: {
+      firstName: 'John',
+      lastName: 'Doe',
+      street: '123 Main St',
+      country: 'United States',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10001'
+    },
+    paymentMethod: 'card'
   },
   {
     id: '1087',
@@ -24,10 +35,21 @@ const initialOrders: OrderItemType[] = [
     date: 'Aug 10, 2023',
     total: 429.98,
     status: 'delivered',
+    userId: '60d21b4967d0d8992e610c86',
     items: [
       { productId: 2, productName: 'Wireless Keyboard', quantity: 1, price: 129.99 },
       { productId: 3, productName: 'Smart Watch', quantity: 1, price: 299.99 },
     ],
+    shippingAddress: {
+      firstName: 'Jane',
+      lastName: 'Smith',
+      street: '456 Oak Ave',
+      country: 'United States',
+      city: 'Los Angeles',
+      state: 'CA',
+      zipcode: '90001'
+    },
+    paymentMethod: 'paypal'
   },
   {
     id: '1086',
@@ -35,9 +57,20 @@ const initialOrders: OrderItemType[] = [
     date: 'Aug 8, 2023',
     total: 249.99,
     status: 'delivered',
+    userId: '60d21b4967d0d8992e610c87',
     items: [
       { productId: 1, productName: 'Premium Headphones', quantity: 1, price: 249.99 },
     ],
+    shippingAddress: {
+      firstName: 'Robert',
+      lastName: 'Johnson',
+      street: '789 Pine St',
+      country: 'United States',
+      city: 'Chicago',
+      state: 'IL',
+      zipcode: '60601'
+    },
+    paymentMethod: 'card'
   },
   {
     id: '1085',
@@ -45,12 +78,23 @@ const initialOrders: OrderItemType[] = [
     date: 'Aug 5, 2023',
     total: 539.96,
     status: 'delivered',
+    userId: '60d21b4967d0d8992e610c88',
     items: [
       { productId: 5, productName: 'Ergonomic Mouse', quantity: 2, price: 89.99 },
       { productId: 2, productName: 'Wireless Keyboard', quantity: 1, price: 129.99 },
       { productId: 6, productName: 'Laptop Stand', quantity: 2, price: 49.99 },
       { productId: 4, productName: 'Bluetooth Speaker', quantity: 1, price: 179.99 },
     ],
+    shippingAddress: {
+      firstName: 'Emily',
+      lastName: 'Davis',
+      street: '321 Maple Rd',
+      country: 'United States',
+      city: 'Miami',
+      state: 'FL',
+      zipcode: '33101'
+    },
+    paymentMethod: 'paypal'
   },
 ];
 

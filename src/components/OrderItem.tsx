@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Package, Loader2 } from 'lucide-react';
+import { Package, Loader2, CreditCard, MapPin, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
 export type OrderStatus = 'processing' | 'delivered';
+export type PaymentMethod = 'card' | 'paypal';
 
 export interface OrderItem {
   id: string;
@@ -13,12 +14,23 @@ export interface OrderItem {
   date: string;
   total: number;
   status: OrderStatus;
+  userId?: string;
   items: {
     productId: number;
     productName: string;
     quantity: number;
     price: number;
   }[];
+  shippingAddress?: {
+    firstName: string;
+    lastName: string;
+    street: string;
+    country: string;
+    city: string;
+    state: string;
+    zipcode: string;
+  };
+  paymentMethod?: PaymentMethod;
 }
 
 interface OrderItemProps {
@@ -60,6 +72,20 @@ const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
           </div>
           <h3 className="text-lg font-medium">{order.customerName}</h3>
           <p className="text-sm text-muted-foreground">{order.date}</p>
+          
+          {order.userId && (
+            <div className="flex items-center mt-2 text-sm text-muted-foreground">
+              <User className="w-3 h-3 mr-1" />
+              <span>User ID: {order.userId}</span>
+            </div>
+          )}
+          
+          {order.paymentMethod && (
+            <div className="flex items-center mt-1 text-sm text-muted-foreground">
+              <CreditCard className="w-3 h-3 mr-1" />
+              <span>Payment: {order.paymentMethod}</span>
+            </div>
+          )}
         </div>
         
         <div className="flex flex-col items-end">
@@ -119,6 +145,21 @@ const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
           ))}
         </ul>
       </div>
+      
+      {order.shippingAddress && (
+        <div className="mt-4 border-t border-border pt-4">
+          <h4 className="text-sm font-medium mb-2 flex items-center">
+            <MapPin className="w-3 h-3 mr-1" />
+            Shipping Address
+          </h4>
+          <div className="text-sm text-muted-foreground">
+            <p>{order.shippingAddress.firstName} {order.shippingAddress.lastName}</p>
+            <p>{order.shippingAddress.street}</p>
+            <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipcode}</p>
+            <p>{order.shippingAddress.country}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

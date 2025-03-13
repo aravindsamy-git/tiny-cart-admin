@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Package } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export type OrderStatus = 'processing' | 'delivered';
 
@@ -26,9 +27,9 @@ interface OrderItemProps {
 }
 
 const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (onStatusChange) {
-      onStatusChange(order.id, e.target.value as OrderStatus);
+  const handleStatusChange = (newStatus: OrderStatus) => {
+    if (onStatusChange && newStatus !== order.status) {
+      onStatusChange(order.id, newStatus);
     }
   };
 
@@ -55,17 +56,22 @@ const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
         <div className="flex flex-col items-end">
           <span className="text-xl font-semibold">${order.total.toFixed(2)}</span>
           <div className="mt-2 flex items-center space-x-2">
-            <select 
-              value={order.status}
-              onChange={handleStatusChange}
-              className="text-sm font-medium rounded-full px-3 py-1 border border-input bg-transparent"
+            <Button
+              variant={order.status === 'processing' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => handleStatusChange('processing')}
+              className="text-xs"
             >
-              <option value="processing">Processing</option>
-              <option value="delivered">Delivered</option>
-            </select>
-            <span className={statusClasses[order.status]}>
-              {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-            </span>
+              Processing
+            </Button>
+            <Button
+              variant={order.status === 'delivered' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => handleStatusChange('delivered')}
+              className="text-xs"
+            >
+              Delivered
+            </Button>
           </div>
         </div>
       </div>

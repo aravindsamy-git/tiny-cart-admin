@@ -57,7 +57,6 @@ const initialProducts: Product[] = [
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const handleStockChange = (id: number, newStock: number) => {
     setProducts(products.map(product => 
@@ -70,13 +69,7 @@ const ProductsPage = () => {
       description: `New stock quantity: ${newStock}`,
     });
   };
-
-  const categories = ['all', ...Array.from(new Set(products.map(p => p.category)))];
   
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
-    : products.filter(p => p.category === selectedCategory);
-
   return (
     <div className="transition-page space-y-8">
       <div>
@@ -84,29 +77,12 @@ const ProductsPage = () => {
         <p className="text-muted-foreground">Manage your product inventory.</p>
       </div>
       
-      <div className="flex items-center space-x-4">
-        <div className="glass-card px-4 py-2 rounded-lg flex items-center space-x-2">
-          <span className="text-sm font-medium">Filter by:</span>
-          <select 
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="text-sm font-medium rounded-md px-2 py-1 border-none bg-transparent focus:outline-none focus:ring-0"
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-        
-        <div className="glass-card px-4 py-2 rounded-lg text-sm">
-          <span className="font-medium">{filteredProducts.length}</span> products
-        </div>
+      <div className="glass-card px-4 py-2 rounded-lg text-sm">
+        <span className="font-medium">{products.length}</span> products
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map((product, index) => (
+        {products.map((product, index) => (
           <ProductCard 
             key={product.id} 
             product={product} 

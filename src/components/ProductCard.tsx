@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export interface Product {
   id: number;
@@ -19,15 +20,21 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, onStockChange, className }: ProductCardProps) => {
+  const [tempStock, setTempStock] = useState(product.stock);
+
   const handleIncreaseStock = () => {
-    if (onStockChange) {
-      onStockChange(product.id, product.stock + 1);
-    }
+    setTempStock(prev => prev + 1);
   };
 
   const handleDecreaseStock = () => {
-    if (onStockChange && product.stock > 0) {
-      onStockChange(product.id, product.stock - 1);
+    if (tempStock > 0) {
+      setTempStock(prev => prev - 1);
+    }
+  };
+
+  const handleUpdateStock = () => {
+    if (onStockChange) {
+      onStockChange(product.id, tempStock);
     }
   };
 
@@ -53,40 +60,51 @@ const ProductCard = ({ product, onStockChange, className }: ProductCardProps) =>
         <h3 className="text-lg font-medium">{product.name}</h3>
         <p className="text-muted-foreground">${product.price.toFixed(2)}</p>
         
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex items-center">
-            <span className="text-sm font-medium mr-2">Stock:</span>
-            <div className="flex items-center space-x-2">
-              <button 
-                onClick={handleDecreaseStock}
-                className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground"
-                disabled={product.stock <= 0}
-              >
-                -
-              </button>
-              <span className="w-8 text-center">{product.stock}</span>
-              <button 
-                onClick={handleIncreaseStock}
-                className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground"
-              >
-                +
-              </button>
+        <div className="mt-4 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <span className="text-sm font-medium mr-2">Stock:</span>
+              <div className="flex items-center space-x-2">
+                <button 
+                  onClick={handleDecreaseStock}
+                  className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground"
+                  disabled={tempStock <= 0}
+                >
+                  -
+                </button>
+                <span className="w-8 text-center">{tempStock}</span>
+                <button 
+                  onClick={handleIncreaseStock}
+                  className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex items-center">
+              {product.stock > 0 ? (
+                <span className="inline-flex items-center text-green-600 text-sm">
+                  <Check className="w-4 h-4 mr-1" />
+                  Available
+                </span>
+              ) : (
+                <span className="inline-flex items-center text-red-600 text-sm">
+                  <X className="w-4 h-4 mr-1" />
+                  Out of stock
+                </span>
+              )}
             </div>
           </div>
           
-          <div className="flex items-center">
-            {product.stock > 0 ? (
-              <span className="inline-flex items-center text-green-600 text-sm">
-                <Check className="w-4 h-4 mr-1" />
-                Available
-              </span>
-            ) : (
-              <span className="inline-flex items-center text-red-600 text-sm">
-                <X className="w-4 h-4 mr-1" />
-                Out of stock
-              </span>
-            )}
-          </div>
+          <Button 
+            onClick={handleUpdateStock}
+            variant="secondary"
+            className="w-full"
+            disabled={tempStock === product.stock}
+          >
+            Update Stock
+          </Button>
         </div>
       </div>
     </div>

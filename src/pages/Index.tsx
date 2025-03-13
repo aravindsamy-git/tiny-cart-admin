@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Package, ShoppingCart, TrendingUp, Truck, Users } from 'lucide-react';
+import { Package, ShoppingCart, TrendingUp, Truck, Users, BarChart3, LineChart, DollarSign } from 'lucide-react';
 import StatsCard from '@/components/StatsCard';
 
 const IndexPage = () => {
@@ -46,39 +46,89 @@ const IndexPage = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="glass-card rounded-xl p-6 animate-fadeIn" style={{ animationDelay: '200ms' }}>
-          <h2 className="text-lg font-medium mb-4">Recent Activity</h2>
+          <h2 className="text-lg font-medium mb-4 flex items-center">
+            <BarChart3 className="w-5 h-5 mr-2" />
+            Performance Metrics
+          </h2>
           <div className="space-y-4">
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary">
-                <ShoppingCart className="w-4 h-4" />
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Conversion Rate</span>
+                <span className="font-medium">4.2%</span>
               </div>
-              <div>
-                <p className="text-sm font-medium">New order #1088</p>
-                <p className="text-xs text-muted-foreground">John Doe placed a new order</p>
-                <p className="text-xs text-muted-foreground mt-1">5 minutes ago</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary">
-                <Truck className="w-4 h-4" />
-              </div>
-              <div>
-                <p className="text-sm font-medium">Order #1087 delivered</p>
-                <p className="text-xs text-muted-foreground">Order successfully delivered</p>
-                <p className="text-xs text-muted-foreground mt-1">1 hour ago</p>
+              <div className="w-full bg-secondary/30 rounded-full h-2">
+                <div className="bg-primary h-2 rounded-full" style={{ width: '42%' }}></div>
               </div>
             </div>
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary">
-                <Package className="w-4 h-4" />
+            
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Average Order Value</span>
+                <span className="font-medium">$193.75</span>
               </div>
-              <div>
-                <p className="text-sm font-medium">Stock updated</p>
-                <p className="text-xs text-muted-foreground">Premium Headphones stock updated to 20</p>
-                <p className="text-xs text-muted-foreground mt-1">3 hours ago</p>
+              <div className="w-full bg-secondary/30 rounded-full h-2">
+                <div className="bg-primary h-2 rounded-full" style={{ width: '65%' }}></div>
               </div>
+            </div>
+            
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Revenue Growth</span>
+                <span className="font-medium">+8.3%</span>
+              </div>
+              <div className="w-full bg-secondary/30 rounded-full h-2">
+                <div className="bg-primary h-2 rounded-full" style={{ width: '83%' }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="glass-card rounded-xl p-6 animate-fadeIn" style={{ animationDelay: '300ms' }}>
+          <h2 className="text-lg font-medium mb-4 flex items-center">
+            <LineChart className="w-5 h-5 mr-2" />
+            Top Products
+          </h2>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded bg-secondary/30 flex items-center justify-center text-primary mr-3">
+                  <DollarSign className="w-4 h-4" />
+                </div>
+                <span className="text-sm">Premium Headphones</span>
+              </div>
+              <span className="text-sm font-medium">$1,249.95</span>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded bg-secondary/30 flex items-center justify-center text-primary mr-3">
+                  <DollarSign className="w-4 h-4" />
+                </div>
+                <span className="text-sm">Smart Watch</span>
+              </div>
+              <span className="text-sm font-medium">$899.97</span>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded bg-secondary/30 flex items-center justify-center text-primary mr-3">
+                  <DollarSign className="w-4 h-4" />
+                </div>
+                <span className="text-sm">Bluetooth Speaker</span>
+              </div>
+              <span className="text-sm font-medium">$719.96</span>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded bg-secondary/30 flex items-center justify-center text-primary mr-3">
+                  <DollarSign className="w-4 h-4" />
+                </div>
+                <span className="text-sm">Wireless Keyboard</span>
+              </div>
+              <span className="text-sm font-medium">$649.95</span>
             </div>
           </div>
         </div>

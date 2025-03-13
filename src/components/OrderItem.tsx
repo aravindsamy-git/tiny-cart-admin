@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Package } from 'lucide-react';
+import { Package, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 
 export type OrderStatus = 'processing' | 'delivered';
 
@@ -27,9 +28,17 @@ interface OrderItemProps {
 }
 
 const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
+  const [isUpdating, setIsUpdating] = useState<OrderStatus | null>(null);
+
   const handleStatusChange = (newStatus: OrderStatus) => {
     if (onStatusChange && newStatus !== order.status) {
-      onStatusChange(order.id, newStatus);
+      setIsUpdating(newStatus);
+      
+      // Simulate API call to update status in database
+      setTimeout(() => {
+        onStatusChange(order.id, newStatus);
+        setIsUpdating(null);
+      }, 1500); // Simulate a delay of 1.5 seconds
     }
   };
 
@@ -61,20 +70,43 @@ const OrderItem = ({ order, onStatusChange, className }: OrderItemProps) => {
               size="sm"
               onClick={() => handleStatusChange('processing')}
               className="text-xs"
+              disabled={isUpdating !== null}
             >
-              Processing
+              {isUpdating === 'processing' ? (
+                <>
+                  <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                'Processing'
+              )}
             </Button>
             <Button
               variant={order.status === 'delivered' ? 'default' : 'outline'}
               size="sm"
               onClick={() => handleStatusChange('delivered')}
               className="text-xs"
+              disabled={isUpdating !== null}
             >
-              Delivered
+              {isUpdating === 'delivered' ? (
+                <>
+                  <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                'Delivered'
+              )}
             </Button>
           </div>
         </div>
       </div>
+      
+      {isUpdating && (
+        <div className="mt-4">
+          <p className="text-xs text-center text-muted-foreground mb-1">Updating status...</p>
+          <Progress value={100} className="h-1" />
+        </div>
+      )}
       
       <div className="mt-4 border-t border-border pt-4">
         <h4 className="text-sm font-medium mb-2">Order Items</h4>

@@ -59,6 +59,7 @@ const OrdersPage = () => {
   const [statusFilter, setStatusFilter] = useState<'all' | OrderStatus>('all');
 
   const handleStatusChange = (id: string, newStatus: OrderStatus) => {
+    // This function is called after the simulated delay in OrderItem
     setOrders(orders.map(order => 
       order.id === id ? { ...order, status: newStatus } : order
     ));
